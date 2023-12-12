@@ -1,22 +1,16 @@
 package generalstore.tests;
 
-import io.appium.java_client.AppiumBy;
-import org.testng.Assert;
+import generalstore.pages.FormSayfasi;
 import org.testng.annotations.Test;
 
+import static generalstore.utils.Driver.uygulamayiKapat;
+
 public class TC02_NegatifTest {
-    /*
-    Uygulama: GeneralStore
-        GeneralStore uygulamasına gir
-        Menüden Angola seçeneğini seç
-        Your Name kutusunu boş bırak
-        Let’s Shop butonuna tıkla
-        Hata mesajını doğrula (Toast Message)
-     */
     @Test
-    public void testGenaralStoreNegativeTest() {
-        driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop")).click();
-        String toastMessage = driver.findElement(AppiumBy.xpath("//android.widget.Toast")).getAttribute("name");
-        Assert.assertEquals(toastMessage, "Please enter your name");
+    public void tc02NegatifTest() {
+        FormSayfasi formSayfasi = new FormSayfasi();
+        formSayfasi.letsShopButonunaTikla();
+        formSayfasi.hataMesajininGorundugunuDogrula("Please enter your name");
+        uygulamayiKapat();
     }
 }

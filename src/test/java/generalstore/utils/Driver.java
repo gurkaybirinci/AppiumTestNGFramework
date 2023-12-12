@@ -14,25 +14,34 @@ public class Driver {
     public static AndroidDriver driver;
 
     public static AndroidDriver getDriver() {
-        String appUrl = System.getProperty("user.dir")
-                + File.separator + "src"
-                + File.separator + "test"
-                + File.separator + "resources"
-                + File.separator + "General-Store.apk";
+        if (driver == null) {
+            String appUrl = System.getProperty("user.dir")
+                    + File.separator + "src"
+                    + File.separator + "test"
+                    + File.separator + "resources"
+                    + File.separator + "General-Store.apk";
 
-        UiAutomator2Options options = new UiAutomator2Options()
-                .setApp(appUrl);
+            UiAutomator2Options options = new UiAutomator2Options()
+                    .setApp(appUrl);
 
-        URL url = null;
-        try {
-            url = new URL("http://0.0.0.0:4723");
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            URL url = null;
+            try {
+                url = new URL("http://0.0.0.0:4723");
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+
+            driver = new AndroidDriver(url, options);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
-
-        driver = new AndroidDriver(url, options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;
+    }
+
+    public static void uygulamayiKapat() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 
 
