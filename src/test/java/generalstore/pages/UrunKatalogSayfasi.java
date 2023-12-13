@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 import static generalstore.utils.Driver.driver;
+import static generalstore.utils.ExtentReport.bilgiNotu;
 
 public class UrunKatalogSayfasi extends ReusableMethods {
     public UrunKatalogSayfasi() {
@@ -26,10 +27,12 @@ public class UrunKatalogSayfasi extends ReusableMethods {
     public void sepeteUrunEkle(String urun, int index){
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+urun+"\"))"));
         addToCart.get(index).click();
+        bilgiNotu(urun + " ürünü sepete eklendi.");
     }
 
     public void sepeteGit(){
         sepeteGit.click();
+        bilgiNotu("Sepet butonuna tıklanarak Sepet sayfasına gidildi.");
     }
 
 }

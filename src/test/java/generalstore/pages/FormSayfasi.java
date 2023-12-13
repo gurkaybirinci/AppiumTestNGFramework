@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import static generalstore.utils.Driver.driver;
+import static generalstore.utils.ExtentReport.bilgiNotu;
 
 public class FormSayfasi extends ReusableMethods {
     public FormSayfasi() {
@@ -35,10 +36,12 @@ public class FormSayfasi extends ReusableMethods {
         ulkeMenusu.click();
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+ulke+"\"))"));
         driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\""+ulke+"\"]")).click();
+        bilgiNotu("Ülke menüsünden " + ulke + " ülkesi seçildi.");
     }
 
     public void isimGir(String isim){
         isimAlani.sendKeys(isim);
+        bilgiNotu("İsim kutusuna " + isim + " ismi girildi.");
     }
 
     public void cinsiyetSec(String cinsiyet){
@@ -47,18 +50,22 @@ public class FormSayfasi extends ReusableMethods {
         }else {
             cinsiyetMale.click();
         }
+        bilgiNotu("Cinsiyet seçeneklerinden " + cinsiyet + " seçildi.");
     }
 
     public void letsShopButonunaTikla(){
         letsShopButonu.click();
+        bilgiNotu("Let's Shop butonuna tıklandı.");
     }
 
     public void sayfaBasliginiDogrula(){
         Assert.assertEquals(sayfaBasligi.getText(), "General Store");
+        bilgiNotu("Sayfa başlığının General Store olduğu doğrulandı.");
     }
 
     public void hataMesajininGorundugunuDogrula(String mesaj){
         Assert.assertEquals(hataMesaji.getAttribute("name"), mesaj);
+        bilgiNotu("Hata mesajının " + mesaj +  " olduğu doğrulandı.");
     }
 
 

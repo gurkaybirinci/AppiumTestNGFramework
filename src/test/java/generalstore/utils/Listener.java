@@ -23,6 +23,7 @@ public class Listener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         testOlustur(result.getMethod().getMethodName());
+        test.info("Test başladı.");
     }
 
     @Override
@@ -33,7 +34,7 @@ public class Listener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         // Hata mesajı
-        test.fail(result.getThrowable().getMessage());
+        test.fail("Test başarısız oldu. Çünkü: " + result.getThrowable().getMessage());
 
         // Ekran Görüntüsü alma
         File dosya = driver.getScreenshotAs(OutputType.FILE);
@@ -55,6 +56,7 @@ public class Listener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
+        uygulamayiKapat();
         raporuKaydet();
     }
 }

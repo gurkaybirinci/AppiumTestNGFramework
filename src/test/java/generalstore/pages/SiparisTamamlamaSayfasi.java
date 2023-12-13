@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import static generalstore.utils.Driver.driver;
+import static generalstore.utils.ExtentReport.bilgiNotu;
 
 public class SiparisTamamlamaSayfasi extends ReusableMethods {
     public SiparisTamamlamaSayfasi() {
@@ -23,12 +24,12 @@ public class SiparisTamamlamaSayfasi extends ReusableMethods {
 
     public void aramaMotorundaAra(String metin){
         aramaMotoru.sendKeys(metin, Keys.ENTER);
+        bilgiNotu("Arama motorunda " +metin+ " metni arandı.");
     }
 
     public void uygulamayaGeriDon(){
         driver.pressKey(new KeyEvent(AndroidKey.BACK));
         driver.context("NATIVE_APP");
+        bilgiNotu("Uygulama Ana Sayfasına geri dönüldü.");
     }
-
-
 }
