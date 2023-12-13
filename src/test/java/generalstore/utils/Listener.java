@@ -10,13 +10,14 @@ import org.testng.ITestResult;
 import java.io.File;
 import java.io.IOException;
 
-import static generalstore.utils.Driver.driver;
-import static generalstore.utils.Driver.uygulamayiKapat;
+import static generalstore.utils.ConfigReader.getProperty;
+import static generalstore.utils.Driver.*;
 import static generalstore.utils.ExtentReport.*;
 
 public class Listener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
+        serverBaslat(getProperty("localIPAdres"), Integer.parseInt(getProperty("localPort")));
         raporOlustur();
     }
 
@@ -58,6 +59,7 @@ public class Listener implements ITestListener {
     public void onFinish(ITestContext context) {
         uygulamayiKapat();
         raporuKaydet();
+        serverKapat();
     }
 }
 
